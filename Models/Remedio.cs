@@ -7,7 +7,7 @@ namespace Exercicios.Models
 {
     public class Remedio
     {
-        public Guid Id { get; set; }
+         public int RemedioId { get; set; }
 
         public string NomeComercial { get; set; }
 
@@ -17,10 +17,12 @@ namespace Exercicios.Models
 
         public string ViaAdministracao { get; set; }
 
+        public string ResumoBasico { get; set; }
+
         public string CategoriaFarmacologica { get; set; }
 
         public string Imagem { get; set; }
 
-        public List<SinalClinico> SinaisClinicos { get; set; }
+        public List<SinalClinico> SinaisClinicos { get; set; } = new List<SinalClinico>();
     }
 }

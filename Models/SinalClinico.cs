@@ -7,8 +7,10 @@ namespace Exercicios.Models
 {
     public class SinalClinico
     {
-        public Guid Id { get; set; }
+        public int SinalClinicoId { get; set; }
 
         public string Sinal { get; set; }
+
+        public int RemedioId { get; set; }
     }
 }

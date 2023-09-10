@@ -1,0 +1,20 @@
+@model List<Remedio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@foreach ( var remedio in Model)
+
+{
+    <h1>@remedio.NomeComercial </h1>
+
+    foreach (var sinal in remedio.SinaisClinicos)
+    {
+        <h2>@sinal.Sinal</h2>
+    }
+
+    <a asp-action="Edit" asp-route-id="@remedio.RemedioId">Editar</a> 
+}

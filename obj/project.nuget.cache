@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WLZ+ff22JwQtubPg74Ma+qaEq/z1eD8HhyQVVIBNjQRPVDjZcgO3UlUcq39Htr7+RpvX3W20vF3KValEHi4TdQ==",
+  "dgSpecHash": "yYYqZv8YNRWgqMKeHeEo8hkanTBhuuV+Tuq7mKiV6ZJ9QTPbQwKHOA4jTqqqcdID8uGQYkfPw7zg1tBmZKLUwA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\vlima06\\OneDrive - JACTO\\Área de Trabalho\\Simples\\Teste 1\\Projeto 3\\Exercicios\\Exercicios.csproj",
+  "projectFilePath": "C:\\Users\\vlima06\\OneDrive - JACTO\\Área de Trabalho\\Simples\\Teste 1\\Projeto 3\\Exercicios\\Exercicios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vlima06\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\vlima06\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.10\\microsoft.entityframeworkcore.7.0.10.nupkg.sha512",

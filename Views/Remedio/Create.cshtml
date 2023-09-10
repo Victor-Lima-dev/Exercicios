@@ -1,0 +1,136 @@
+@model Remedio
+
+
+<form asp-action="Create" method="post">
+
+<div>
+    <label> Nome Comercial</label>
+    <input type="text" name="NomeComercial" asp-for="@Model.NomeComercial" />
+</div>
+
+@* PrincipioAtivo*@
+
+<div>
+    <label> Principio Ativo</label>
+    <input type="text" name="PrincipioAtivo" asp-for="@Model.PrincipioAtivo" />
+</div>
+
+@* Dose *@
+<div>
+    <label> Dose</label>
+    <input type="text" name="Dose" asp-for="@Model.Dose" />
+</div>
+
+@* ViaAdministracao *@
+<div>
+    <label> Via de Administração</label>
+    <input type="text" name="ViaAdministracao" asp-for="@Model.ViaAdministracao" />
+</div>
+
+@* ResumoBasico *@
+
+<div>
+    <label> Resumo Basico</label>
+    <input type="text" name="ResumoBasico" asp-for="@Model.ResumoBasico" />
+</div>
+
+@* CategoriaFarmacologica *@
+
+<div>
+    <label> Categoria Farmacologica</label>
+    <input type="text" name="CategoriaFarmacologica" asp-for="@Model.CategoriaFarmacologica" />
+</div>
+
+@* Imagem *@
+
+<div>
+    <label> Imagem</label>
+    <input type="text" name="Imagem" asp-for="@Model.Imagem" />
+</div>
+
+<div class="form-group">
+        <label>Alternativas</label>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Texto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="alternativas">
+                @{ var index = 0; }
+                @foreach (var sinal in Model.SinaisClinicos)
+                {
+                    <tr>
+                        <td><input type="text" name="SinaisClinicos[@index].Sinal"
+                                value="@sinal.Sinal" class="form-control" /></td>
+                    
+
+                        <td><button type="button" class="btn btn-danger" onclick="removerAlternativa(this)">Remover</button>
+                        </td>
+                    </tr>
+                     index++;
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="adicionarAlternativa()">Adicionar Alternativa</button>
+    </div>
+
+
+
+
+@* subimit *@
+
+<div>
+    <input type="submit" value="Salvar" />
+</div>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Define uma variável global chamada index que armazena o número de alternativas existentes
+var index = $("#alternativas").children().length;
+
+// Define uma função chamada adicionarAlternativa que não recebe nenhum parâmetro
+function adicionarAlternativa() {
+    // Cria uma variável chamada alternativas que armazena o elemento HTML com o id "alternativas"
+    var alternativas = $("#alternativas");
+    // Cria uma variável chamada tr que armazena um novo elemento HTML do tipo <tr> (table row)
+    var tr = $("<tr></tr>");
+    // Cria uma variável chamada tdTexto que armazena um novo elemento HTML do tipo <td> (table data)
+    var tdTexto = $("<td></td>");
+    // Cria uma variável chamada inputTexto que armazena um novo elemento HTML do tipo <input> com os atributos type, name e class definidos
+    var inputTexto = $("<input type='text' name='SinaisClinicos[" + index + "].Sinal' class='form-control' />");
+    // Adiciona o elemento inputTexto como filho do elemento tdTexto
+    tdTexto.append(inputTexto);
+    // Cria uma variável chamada tdAcoes que armazena um novo elemento HTML do tipo <td>
+    var tdAcoes = $("<td></td>");
+    // Cria uma variável chamada buttonRemover que armazena um novo elemento HTML do tipo <button> com os atributos type, class e onclick definidos
+    var buttonRemover = $("<button type='button' class='btn btn-danger' onclick='removerAlternativa(this)'>Remover</button>");
+    // Adiciona o elemento buttonRemover como filho do elemento tdAcoes
+    tdAcoes.append(buttonRemover);
+    // Adiciona os elementos tdTexto e tdAcoes como filhos do elemento tr
+    tr.append(tdTexto);
+    tr.append(tdAcoes);
+    // Adiciona o elemento tr como filho do elemento alternativas
+    alternativas.append(tr);
+    // Incrementa a variável index em 1
+    index++;
+}
+
+// Define uma função chamada removerAlternativa que recebe um parâmetro chamado button
+function removerAlternativa(button) {
+    // Cria uma variável chamada tr que armazena o elemento pai do elemento pai do botão
+    var tr = $(button).parent().parent();
+    // Remove o elemento tr do documento HTML
+    tr.remove();
+}
+
+
+
+
+
+
+</script>
