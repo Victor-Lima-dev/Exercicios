@@ -63,11 +63,6 @@ namespace Exercicios.Controllers
 
         public IActionResult Edit(Remedio remedio)
         {
-
-
-
-
-
             var sinais = remedio.SinaisClinicos.ToList();
 
             //procurar no banco de dados os sinais que possuem id do remedio enviado
@@ -84,16 +79,43 @@ namespace Exercicios.Controllers
                 }
             }
 
-
-
-
             _context.Remedioss.Update(remedio);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var remedio = _context.Remedioss.Find(id);
 
+            //verificar se o remedio é nulo
 
+            if (remedio == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remedioss.Remove(remedio);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var sinais = _context.SinaisClinicoss.Where(x => x.RemedioId == id).ToList();
+            var remedio = _context.Remedioss.Find(id);
+
+            //verificar se o remedio é nulo
+
+            if (remedio == null)
+            {
+                return NotFound();
+            }
+
+            return View(remedio);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
