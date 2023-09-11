@@ -19,7 +19,7 @@
             <div class="input-group mb-3">
                
                 <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
-                    <option value="">Selecione um nome comercial</option>
+                    <option value=""></option>
                     @foreach (var valor in listaTodosNomesComerciais.Distinct())
                     {
                         var tipo = "NomeComercial";
@@ -35,7 +35,7 @@
             <div class="input-group mb-3">
                
                 <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
-                    <option value="">Selecione um princípio ativo</option>
+                    <option value=""></option>
                     @foreach (var valor in listaTodosPrincipiosAtivos.Distinct())
                     {
                         var tipo = "PrincipioAtivo";
@@ -51,7 +51,7 @@
             <div class="input-group mb-3">
                
                 <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
-                    <option value="">Selecione uma categoria farmacológica</option>
+                    <option value=""></option>
                     @foreach (var valor in listaTodasCategoriasFarmacologicas.Distinct())
                     {
                         var tipo = "CategoriaFarmacologica";
@@ -70,7 +70,7 @@
 
     <hr />
 
-    <h2 class="text-center">Farmacos</h2>
+    <h2 class="text-center">Fármacos</h2>
 
     <div class="row">
 
