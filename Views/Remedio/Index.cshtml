@@ -80,10 +80,10 @@
                 <div class="card h-100">
     
                     <div class="card-body">
-                        <h5 class="card-title">@remedio.PrincipioAtivo</h5>
-                        <p class="card-text">@remedio.NomeComercial</p>
-                        <p class="card-text">@remedio.Dose</p>
-                        <span class="badge badge-secondary">@remedio.CategoriaFarmacologica</span>
+                        <h5 class="card-title">Principio Ativo: @remedio.PrincipioAtivo</h5>
+                        <p class="card-text">Nome Comercial: @remedio.NomeComercial</p>
+                        <p class="card-text">Dose: @remedio.Dose</p>
+                        <span class="badge badge-secondary">Categoria Fármacologica: @remedio.CategoriaFarmacologica</span>
                     </div>
                     <div class="card-footer">
                         <a href="@Url.Action("Details", "Remedio", new {id = remedio.RemedioId})" class="btn btn-info">Detalhes</a>
