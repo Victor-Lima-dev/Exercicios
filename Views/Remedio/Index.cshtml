@@ -65,10 +65,12 @@
     </div>
 
     <a href="@Url.Action("Index", "Remedio")" class="btn btn-primary">Limpar Pesquisa</a>
+    @* criar remedio *@
+    <a href="@Url.Action("Create", "Remedio")" class="btn btn-success">Criar Farmaco</a>
 
     <hr />
 
-    <h2 class="text-center">Remédios</h2>
+    <h2 class="text-center">Farmacos</h2>
 
     <div class="row">
 
@@ -91,7 +93,7 @@
                         @* deletar *@
 
                         <a href="@Url.Action("Delete", "Remedio", new {id = remedio.RemedioId})" class="btn btn-danger">Deletar</a>
-                        
+
                        
                     </div>
                 </div>
