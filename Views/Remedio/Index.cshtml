@@ -1,22 +1,103 @@
-@model List<Remedio>
+@model RemediosViewModel
 
 @{
-    ViewBag.Title = "Index";
+    var listaTodosRemedios = Model.TodosRemedios;
+
+    var listaTodosNomesComerciais = listaTodosRemedios.Select(r => r.NomeComercial).ToList();
+
+    var listaTodosPrincipiosAtivos = listaTodosRemedios.Select(r => r.PrincipioAtivo).ToList();
+
+    var listaTodasCategoriasFarmacologicas = listaTodosRemedios.Select(r => r.CategoriaFarmacologica).ToList();
+
+    var listaRemediosSelecionados = Model.RemediosSelecionados;
 }
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-center">Nome Comercial</h3>
+            <div class="input-group mb-3">
+               
+                <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
+                    <option value="">Selecione um nome comercial</option>
+                    @foreach (var valor in listaTodosNomesComerciais.Distinct())
+                    {
+                        var tipo = "NomeComercial";
+                        <option value="@Url.Action("Procurar", "Remedio", new {valor = valor, tipo = tipo})"> @valor
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
 
+        <div class="col-md-4">
+            <h3 class="text-center">Princípio Ativo</h3>
+            <div class="input-group mb-3">
+               
+                <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
+                    <option value="">Selecione um princípio ativo</option>
+                    @foreach (var valor in listaTodosPrincipiosAtivos.Distinct())
+                    {
+                        var tipo = "PrincipioAtivo";
+                        <option value="@Url.Action("Procurar", "Remedio", new {valor = valor, tipo = tipo})"> @valor
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
 
-@foreach ( var remedio in Model)
+        <div class="col-md-4">
+            <h3 class="text-center">Categoria Farmacológica</h3>
+            <div class="input-group mb-3">
+               
+                <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
+                    <option value="">Selecione uma categoria farmacológica</option>
+                    @foreach (var valor in listaTodasCategoriasFarmacologicas.Distinct())
+                    {
+                        var tipo = "CategoriaFarmacologica";
+                        <option value="@Url.Action("Procurar", "Remedio", new {valor = valor, tipo = tipo})"> @valor
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
 
-{
-    <h1>@remedio.NomeComercial </h1>
+    </div>
 
-    foreach (var sinal in remedio.SinaisClinicos)
-    {
-        <h2>@sinal.Sinal</h2>
-    }
+    <a href="@Url.Action("Index", "Remedio")" class="btn btn-primary">Limpar Pesquisa</a>
 
-    <a asp-action="Edit" asp-route-id="@remedio.RemedioId">Editar</a> 
-    <a asp-action="Details" asp-route-id="@remedio.RemedioId">Detalhes</a>
-    <a asp-action="Delete" asp-route-id="@remedio.RemedioId">Excluir</a>
-}
+    <hr />
+
+    <h2 class="text-center">Remédios</h2>
+
+    <div class="row">
+
+        @foreach (var remedio in Model.RemediosSelecionados)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+    
+                    <div class="card-body">
+                        <h5 class="card-title">@remedio.PrincipioAtivo</h5>
+                        <p class="card-text">@remedio.NomeComercial</p>
+                        <p class="card-text">@remedio.Dose</p>
+                        <span class="badge badge-secondary">@remedio.CategoriaFarmacologica</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Details", "Remedio", new {id = remedio.RemedioId})" class="btn btn-info">Detalhes</a>
+                        @* editar *@
+
+                        <a href="@Url.Action("Edit", "Remedio", new {id = remedio.RemedioId})" class="btn btn-warning">Editar</a>
+                        @* deletar *@
+
+                        <a href="@Url.Action("Delete", "Remedio", new {id = remedio.RemedioId})" class="btn btn-danger">Deletar</a>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

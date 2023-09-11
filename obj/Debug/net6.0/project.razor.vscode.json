@@ -23734,6 +23734,11 @@
       "FilePath": "c:\\Users\\vlima06\\OneDrive - JACTO\\Área de Trabalho\\Simples\\Teste 1\\Projeto 3\\Exercicios\\Views\\Remedio\\Edit.cshtml",
       "TargetPath": "Views\\Remedio\\Edit.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\vlima06\\OneDrive - JACTO\\Área de Trabalho\\Simples\\Teste 1\\Projeto 3\\Exercicios\\Views\\Remedio\\Details.cshtml",
+      "TargetPath": "Views\\Remedio\\Details.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }

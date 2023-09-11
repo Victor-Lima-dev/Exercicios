@@ -1,91 +1,116 @@
 @model Remedio
 
+<div class="container">
+    <h2>Criar Remédio</h2>
+    <form asp-action="Create" method="post">
 
-<form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="NomeComercial">Nome Comercial</label>
+                    <input type="text" name="NomeComercial" asp-for="@Model.NomeComercial" id="NomeComercial" class="form-control" />
+                </div>
 
-<div>
-    <label> Nome Comercial</label>
-    <input type="text" name="NomeComercial" asp-for="@Model.NomeComercial" />
+                <div class="form-group">
+                    <label for="PrincipioAtivo">Princípio Ativo</label>
+                    <input type="text" name="PrincipioAtivo" asp-for="@Model.PrincipioAtivo" id="PrincipioAtivo" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Dose">Dose</label>
+                    <input type="text" name="Dose" asp-for="@Model.Dose" id="Dose" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="ViaAdministracao">Via de Administração</label>
+                    <input type="text" name="ViaAdministracao" asp-for="@Model.ViaAdministracao" id="ViaAdministracao" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="ResumoBasico">Resumo Básico</label>
+                    <input type="text" name="ResumoBasico" asp-for="@Model.ResumoBasico" id="ResumoBasico" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="CategoriaFarmacologica">Categoria Farmacológica</label>
+                    <input type="text" name="CategoriaFarmacologica" asp-for="@Model.CategoriaFarmacologica"
+                        id="CategoriaFarmacologica" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Imagem">Imagem</label>
+                    <input type="text" name="Imagem" asp-for="@Model.Imagem" id="Imagem" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Alternativas</label>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Texto</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alternativas">
+                            @{ var index = 0; }
+                            @foreach (var sinal in Model.SinaisClinicos)
+                            {
+                                <tr>
+                                    <td><input type="text"
+                                            name="SinaisClinicos[@index].Sinal"
+                                            value="@sinal.Sinal"
+                                            class="form-control" /></td>
+
+
+                                    <td><button type="button"
+                                            class="btn btn-danger"
+                                            onclick=
+                                            "removerAlternativa(this)">
+                                            Remover
+                                        </button></td>
+                                </tr>
+                                index++;
+                            }
+                        </tbody>
+                    </table>
+                    <button type=
+                        "button"
+                        class=
+                        "btn btn-primary"
+                        onclick=
+                        "adicionarAlternativa()">
+                        Adicionar Alternativa
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        @* submit *@
+
+        <div class="">
+            <input type=
+                "submit"
+                value=
+                "Salvar"
+                class=
+                "btn btn-success"/>
+        </div>
+
+        @* Voltar *@
+
+        <a href="@Url.Action("Index", "Remedio")"
+            class=
+            "btn btn-primary">
+            Voltar
+        </a>
+
+    </form>
 </div>
 
-@* PrincipioAtivo*@
-
-<div>
-    <label> Principio Ativo</label>
-    <input type="text" name="PrincipioAtivo" asp-for="@Model.PrincipioAtivo" />
-</div>
-
-@* Dose *@
-<div>
-    <label> Dose</label>
-    <input type="text" name="Dose" asp-for="@Model.Dose" />
-</div>
-
-@* ViaAdministracao *@
-<div>
-    <label> Via de Administração</label>
-    <input type="text" name="ViaAdministracao" asp-for="@Model.ViaAdministracao" />
-</div>
-
-@* ResumoBasico *@
-
-<div>
-    <label> Resumo Basico</label>
-    <input type="text" name="ResumoBasico" asp-for="@Model.ResumoBasico" />
-</div>
-
-@* CategoriaFarmacologica *@
-
-<div>
-    <label> Categoria Farmacologica</label>
-    <input type="text" name="CategoriaFarmacologica" asp-for="@Model.CategoriaFarmacologica" />
-</div>
-
-@* Imagem *@
-
-<div>
-    <label> Imagem</label>
-    <input type="text" name="Imagem" asp-for="@Model.Imagem" />
-</div>
-
-<div class="form-group">
-        <label>Alternativas</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Texto</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="alternativas">
-                @{ var index = 0; }
-                @foreach (var sinal in Model.SinaisClinicos)
-                {
-                    <tr>
-                        <td><input type="text" name="SinaisClinicos[@index].Sinal"
-                                value="@sinal.Sinal" class="form-control" /></td>
-                    
-
-                        <td><button type="button" class="btn btn-danger" onclick="removerAlternativa(this)">Remover</button>
-                        </td>
-                    </tr>
-                     index++;
-                }
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-primary" onclick="adicionarAlternativa()">Adicionar Alternativa</button>
-    </div>
-
-
-
-
-@* subimit *@
-
-<div>
-    <input type="submit" value="Salvar" />
-</div>
-
-</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

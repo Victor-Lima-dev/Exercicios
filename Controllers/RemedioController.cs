@@ -26,11 +26,29 @@ namespace Exercicios.Controllers
 
 
         [HttpGet("Index")]
-        public IActionResult Index()
+        public IActionResult Index(List<Remedio> remediosSelecionados)
         {
             var SinaisClinicos = _context.SinaisClinicoss.ToList();
             var remedios = _context.Remedioss.ToList();
-            return View(remedios);
+            //criar a RemediosViewModel
+            var remediosViewModel = new RemediosViewModel
+            {
+                //adicionar os remedios e os sinais clinicos
+                TodosRemedios = remedios,
+                TodosSinaisClinicos = SinaisClinicos
+            };
+            //verificar se a lista de remedios selecionados é nula
+            if (remediosSelecionados.Count == 0)
+            {
+                remediosViewModel.RemediosSelecionados = remediosViewModel.TodosRemedios;
+            }
+            //adicionar os remedios selecionados
+            else
+            {
+                remediosViewModel.RemediosSelecionados = remediosSelecionados;
+            }
+
+            return View(remediosViewModel);
         }
 
         [HttpGet("Create")]
@@ -115,6 +133,49 @@ namespace Exercicios.Controllers
             }
 
             return View(remedio);
+        }
+
+        //HTTp GET PROCURAR/valor/tipo
+
+        [HttpGet("Procurar/{valor}/{tipo}")]
+        public IActionResult Procurar(string valor, string tipo)
+        {
+            //fazer um switch case para verificar o tipo
+
+            var remediosSelecionados = new List<Remedio>();
+
+             var SinaisClinicos = _context.SinaisClinicoss.ToList();
+            var remedios = _context.Remedioss.ToList();
+            //criar a RemediosViewModel
+            var remediosViewModel = new RemediosViewModel
+            {
+                //adicionar os remedios e os sinais clinicos
+                TodosRemedios = remedios,
+                TodosSinaisClinicos = SinaisClinicos
+            };
+
+            switch (tipo)
+            {
+                case "NomeComercial":
+                     remediosSelecionados = _context.Remedioss.Where(x => x.NomeComercial.Contains(valor)).ToList();
+                     remediosViewModel.RemediosSelecionados = remediosSelecionados;
+                     return View("Index", remediosViewModel);
+                case "PrincipioAtivo":
+                     remediosSelecionados = _context.Remedioss.Where(x => x.PrincipioAtivo.Contains(valor)).ToList();
+                     remediosViewModel.RemediosSelecionados = remediosSelecionados;
+                     return View("Index", remediosViewModel);
+                case "CategoriaFarmacologica":
+                     remediosSelecionados = _context.Remedioss.Where(x => x.CategoriaFarmacologica.Contains(valor)).ToList();
+                     remediosViewModel.RemediosSelecionados = remediosSelecionados;
+                     return View("Index", remediosViewModel);
+                default:
+                    return RedirectToAction("Index");
+            }
+
+
+
+         
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
