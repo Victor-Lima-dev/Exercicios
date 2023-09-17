@@ -1,19 +1,21 @@
 @model Remedio
 
 <div class="container">
-    <h2>Editar Remédio</h2>
+    <h2>Editar Fármaco</h2>
     <form asp-action="Edit" method="post">
-        <input type="hidden" asp-for="@Model.RemedioId" />
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="NomeComercial">Nome Comercial</label>
-                    <input type="text" name="NomeComercial" asp-for="@Model.NomeComercial" id="NomeComercial" class="form-control" />
+                    <input type="text" name="NomeComercial" asp-for="@Model.NomeComercial" id="NomeComercial"
+                        class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="PrincipioAtivo">Princípio Ativo</label>
-                    <input type="text" name="PrincipioAtivo" asp-for="@Model.PrincipioAtivo" id="PrincipioAtivo" class="form-control" />
+                    <input type="text" name="PrincipioAtivo" asp-for="@Model.PrincipioAtivo" id="PrincipioAtivo"
+                        class="form-control" />
                 </div>
 
                 <div class="form-group">
@@ -23,29 +25,53 @@
 
                 <div class="form-group">
                     <label for="ViaAdministracao">Via de Administração</label>
-                    <input type="text" name="ViaAdministracao" asp-for="@Model.ViaAdministracao" id="ViaAdministracao" class="form-control" />
+                    <input type="text" name="ViaAdministracao" asp-for="@Model.ViaAdministracao" id="ViaAdministracao"
+                        class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="ResumoBasico">Resumo Básico</label>
-                    <input type="text" name="ResumoBasico" asp-for="@Model.ResumoBasico" id="ResumoBasico" class="form-control" />
+                    <input type="text" name="ResumoBasico" asp-for="@Model.ResumoBasico" id="ResumoBasico"
+                        class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="CategoriaFarmacologica">Categoria Farmacológica</label>
-                    <input type="text" name="CategoriaFarmacologica" asp-for="@Model.CategoriaFarmacologica" id="CategoriaFarmacologica"
-                        class="form-control" />
+                    <input type="text" name="CategoriaFarmacologica" asp-for="@Model.CategoriaFarmacologica"
+                        id="CategoriaFarmacologica" class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="Imagem">Imagem</label>
                     <input type="text" name="Imagem" asp-for="@Model.Imagem" id="Imagem" class="form-control" />
                 </div>
+
+                <div class="form-group">
+                    <label for="EfeitosAdversos">EfeitosAdversos</label>
+                    <input type="text" name="EfeitosAdversos" asp-for="@Model.EfeitosAdversos" id="EfeitosAdversos"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Indicacao">Indicacao</label>
+                    <input type="text" name="Indicacao" asp-for="@Model.Indicacao" id="Indicacao"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Contraindicacao">Contraindicacao</label>
+                    <input type="text" name="Contraindicacao" asp-for="@Model.Contraindicacao" id="Contraindicacao"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="InteracoesFarmacologicas">InteracoesFarmacologicas</label>
+                    <input type="text" name="InteracoesFarmacologicas" asp-for="@Model.InteracoesFarmacologicas"
+                        id="InteracoesFarmacologicas" class="form-control" />
+                </div>
+
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Sinal Clinicos</label>
+                    <label>Especies</label>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -54,27 +80,32 @@
                             </tr>
                         </thead>
                         <tbody id="alternativas">
-                            @{ var index = 0; }
+                            @{
+                                var index = 0;
+                            }
                             @foreach (var sinal in Model.SinaisClinicos)
                             {
                                 <tr>
-                                    <td><input type="text" name="SinaisClinicos[@index].Sinal"
-                                            value="@sinal.Sinal" class="form-control" /></td>
+                                    <td><input type="text" name="SinaisClinicos[@index].Sinal" value="@sinal.Sinal"
+                                            class="form-control" /></td>
 
                                     <input type="hidden" name="SinaisClinicos[@index].SinalClinicoId"
-                                        value="@sinal.SinalClinicoId"/>
+                                        value="@sinal.SinalClinicoId" />
+
+                                    <input type="hidden" asp-for="@Model.RemedioId" />
 
 
-                                    <td><button type="button" class="btn btn-danger"
-                                            onclick="removerAlternativa(this)">Remover</button>
-                                    </td>
+                                    <td><button type="button" class="btn btn-danger" onclick="removerAlternativa(this)">
+                                            Remover
+                                        </button></td>
                                 </tr>
                                 index++;
                             }
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-primary"
-                        onclick="adicionarAlternativa()"> Adicionar Sinal Clinico</button>
+                    <button type="button" class="btn btn-primary" onclick="adicionarAlternativa()">
+                        Adicionar Especie
+                    </button>
                 </div>
 
             </div>
@@ -84,10 +115,14 @@
         @* submit *@
 
         <div class="">
-            <input type="submit" value="Salvar" class ="btn btn-success"/>
+            <input type="submit" value="Salvar" class="btn btn-success" />
         </div>
-        
-    <a href="@Url.Action("Index", "Remedio")" class="btn btn-primary">Voltar</a>
+
+        @* Voltar *@
+
+        <a href="@Url.Action("Index", "Remedio")" class="btn btn-primary">
+            Voltar
+        </a>
 
     </form>
 </div>
@@ -97,40 +132,46 @@
 
 <script>
     // Define uma variável global chamada index que armazena o número de alternativas existentes
-var index = $("#alternativas").children().length;
+    var index = $("#alternativas").children().length;
 
-// Define uma função chamada adicionarAlternativa que não recebe nenhum parâmetro
-function adicionarAlternativa() {
-    // Cria uma variável chamada alternativas que armazena o elemento HTML com o id "alternativas"
-    var alternativas = $("#alternativas");
-    // Cria uma variável chamada tr que armazena um novo elemento HTML do tipo <tr> (table row)
-    var tr = $("<tr></tr>");
-    // Cria uma variável chamada tdTexto que armazena um novo elemento HTML do tipo <td> (table data)
-    var tdTexto = $("<td></td>");
-    // Cria uma variável chamada inputTexto que armazena um novo elemento HTML do tipo <input> com os atributos type, name e class definidos
-    var inputTexto = $("<input type='text' name='SinaisClinicos[" + index + "].Sinal' class='form-control' />");
-    // Adiciona o elemento inputTexto como filho do elemento tdTexto
-    tdTexto.append(inputTexto);
-    // Cria uma variável chamada tdAcoes que armazena um novo elemento HTML do tipo <td>
-    var tdAcoes = $("<td></td>");
-    // Cria uma variável chamada buttonRemover que armazena um novo elemento HTML do tipo <button> com os atributos type, class e onclick definidos
-    var buttonRemover = $("<button type='button' class='btn btn-danger' onclick='removerAlternativa(this)'>Remover</button>");
-    // Adiciona o elemento buttonRemover como filho do elemento tdAcoes
-    tdAcoes.append(buttonRemover);
-    // Adiciona os elementos tdTexto e tdAcoes como filhos do elemento tr
-    tr.append(tdTexto);
-    tr.append(tdAcoes);
-    // Adiciona o elemento tr como filho do elemento alternativas
-    alternativas.append(tr);
-    // Incrementa a variável index em 1
-    index++;
-}
+    // Define uma função chamada adicionarAlternativa que não recebe nenhum parâmetro
+    function adicionarAlternativa() {
+        // Cria uma variável chamada alternativas que armazena o elemento HTML com o id "alternativas"
+        var alternativas = $("#alternativas");
+        // Cria uma variável chamada tr que armazena um novo elemento HTML do tipo <tr> (table row)
+        var tr = $("<tr></tr>");
+        // Cria uma variável chamada tdTexto que armazena um novo elemento HTML do tipo <td> (table data)
+        var tdTexto = $("<td></td>");
+        // Cria uma variável chamada inputTexto que armazena um novo elemento HTML do tipo <input> com os atributos type, name e class definidos
+        var inputTexto = $("<input type='text' name='SinaisClinicos[" + index + "].Sinal' class='form-control' />");
+        // Adiciona o elemento inputTexto como filho do elemento tdTexto
+        tdTexto.append(inputTexto);
+        // Cria uma variável chamada tdAcoes que armazena um novo elemento HTML do tipo <td>
+        var tdAcoes = $("<td></td>");
+        // Cria uma variável chamada buttonRemover que armazena um novo elemento HTML do tipo <button> com os atributos type, class e onclick definidos
+        var buttonRemover = $("<button type='button' class='btn btn-danger' onclick='removerAlternativa(this)'>Remover</button>");
+        // Adiciona o elemento buttonRemover como filho do elemento tdAcoes
+        tdAcoes.append(buttonRemover);
+        // Adiciona os elementos tdTexto e tdAcoes como filhos do elemento tr
+        tr.append(tdTexto);
+        tr.append(tdAcoes);
+        // Adiciona o elemento tr como filho do elemento alternativas
+        alternativas.append(tr);
+        // Incrementa a variável index em 1
+        index++;
+    }
 
-// Define uma função chamada removerAlternativa que recebe um parâmetro chamado button
-function removerAlternativa(button) {
-    // Cria uma variável chamada tr que armazena o elemento pai do elemento pai do botão
-    var tr = $(button).parent().parent();
-    // Remove o elemento tr do documento HTML
-    tr.remove();
-}
+    // Define uma função chamada removerAlternativa que recebe um parâmetro chamado button
+    function removerAlternativa(button) {
+        // Cria uma variável chamada tr que armazena o elemento pai do elemento pai do botão
+        var tr = $(button).parent().parent();
+        // Remove o elemento tr do documento HTML
+        tr.remove();
+    }
+
+
+
+
+
+
 </script>

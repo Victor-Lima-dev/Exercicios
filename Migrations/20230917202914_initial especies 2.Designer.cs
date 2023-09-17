@@ -2,6 +2,7 @@
 using Exercicios.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exercicios.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230917202914_initial especies 2")]
+    partial class initialespecies2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +45,6 @@ namespace Exercicios.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("RemedioId")
-                        .HasColumnType("int");
 
                     b.HasKey("EspecieId");
 

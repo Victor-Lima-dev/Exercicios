@@ -3,6 +3,10 @@
 @{
     var listaTodosRemedios = Model.TodosRemedios;
 
+    @* lista todas especies *@
+
+    var listaEspecies = listaTodosRemedios.SelectMany(r => r.SinaisClinicos).Select(s => s.Sinal).ToList();
+
     var listaTodosNomesComerciais = listaTodosRemedios.Select(r => r.NomeComercial).ToList();
 
     var listaTodosPrincipiosAtivos = listaTodosRemedios.Select(r => r.PrincipioAtivo).ToList();
@@ -39,6 +43,22 @@
                     @foreach (var valor in listaTodosPrincipiosAtivos.Distinct())
                     {
                         var tipo = "PrincipioAtivo";
+                        <option value="@Url.Action("Procurar", "Remedio", new {valor = valor, tipo = tipo})"> @valor
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="text-center">Espécies</h3>
+            <div class="input-group mb-3">
+               
+                <select class="form-control" id="tipo" name="tipo" onchange="window.location.href=this.value">
+                    <option value=""></option>
+                    @foreach (var valor in listaEspecies.Distinct())
+                    {
+                        var tipo = "Especie";
                         <option value="@Url.Action("Procurar", "Remedio", new {valor = valor, tipo = tipo})"> @valor
                         </option>
                     }

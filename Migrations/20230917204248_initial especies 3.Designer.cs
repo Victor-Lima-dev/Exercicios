@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exercicios.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230910205716_mudancas na model234")]
-    partial class mudancasnamodel234
+    [Migration("20230917204248_initial especies 3")]
+    partial class initialespecies3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,39 @@ namespace Exercicios.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("EspecieRemedio", b =>
+                {
+                    b.Property<int>("EspeciesEspecieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RemediosRemedioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EspeciesEspecieId", "RemediosRemedioId");
+
+                    b.HasIndex("RemediosRemedioId");
+
+                    b.ToTable("EspecieRemedio");
+                });
+
+            modelBuilder.Entity("Exercicios.Models.Especie", b =>
+                {
+                    b.Property<int>("EspecieId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("RemedioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EspecieId");
+
+                    b.ToTable("Especiess");
+                });
 
             modelBuilder.Entity("Exercicios.Models.Remedio", b =>
                 {
@@ -31,12 +64,26 @@ namespace Exercicios.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Contraindicacao")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Dose")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("EfeitosAdversos")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Imagem")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Indicacao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("InteracoesFarmacologicas")
                         .HasColumnType("longtext");
 
                     b.Property<string>("NomeComercial")
@@ -78,6 +125,21 @@ namespace Exercicios.Migrations
                     b.HasIndex("RemedioId");
 
                     b.ToTable("SinaisClinicoss");
+                });
+
+            modelBuilder.Entity("EspecieRemedio", b =>
+                {
+                    b.HasOne("Exercicios.Models.Especie", null)
+                        .WithMany()
+                        .HasForeignKey("EspeciesEspecieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Exercicios.Models.Remedio", null)
+                        .WithMany()
+                        .HasForeignKey("RemediosRemedioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Exercicios.Models.SinalClinico", b =>

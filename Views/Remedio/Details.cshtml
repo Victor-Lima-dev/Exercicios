@@ -13,13 +13,19 @@
                     <p class="card-text">Dose: @Model.Dose</p>
                     <p class="card-text">Via Administração: @Model.ViaAdministracao</p>
                     <p class="card-text">@Model.ResumoBasico</p>
+                    <p class="card-text">Indicação: @Model.Indicacao</p>
+                    <p class="card-text">Contra Indicação: @Model.Contraindicacao</p>
+                    <p class="card-text">Efeitos EfeitosAdversos: @Model.EfeitosAdversos</p>
+                    @* InteraçõesFarmacologicas *@
+                    <p class="card-text">Interações Farmacologicas: @Model.InteracoesFarmacologicas</p>
+
                     <span class="badge badge-secondary">Categoria Fármacologica @Model.CategoriaFarmacologica</span>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            <h4>Sinais Clínicos</h4>
+            <h4>Espécies</h4>
             <table class="table table-bordered">
                 <thead>
                     <tr>

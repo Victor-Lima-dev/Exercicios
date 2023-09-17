@@ -23,6 +23,16 @@ namespace Exercicios.Models
 
         public string Imagem { get; set; }
 
+        public string EfeitosAdversos { get; set; }
+
+        public string Indicacao { get; set; }
+
+        public string? Contraindicacao { get; set; }
+
+        public string? InteracoesFarmacologicas { get; set; }
+
+        public List<Especie> Especies { get; set; } = new List<Especie>();
+
         public List<SinalClinico> SinaisClinicos { get; set; } = new List<SinalClinico>();
     }
 }

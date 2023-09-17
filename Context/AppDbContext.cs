@@ -18,5 +18,7 @@ namespace Exercicios.Context
         public DbSet<Remedio> Remedioss { get; set; }
 
         public DbSet<SinalClinico> SinaisClinicoss { get; set; }
+
+        public DbSet<Especie> Especiess { get; set; }
     }
 }
